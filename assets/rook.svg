@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>Rook — faceted rook</title>
+  <rect x="64" y="64" width="896" height="896" rx="200" fill="#16181d"/>
+  <path d="M312 230 L412 230 L412 290 L462 290 L462 230 L562 230 L562 290 L612 290 L612 230 L712 230 L712 380 L672 410 L690 700 L740 740 L740 800 L284 800 L284 740 L334 700 L352 410 L312 380 Z" fill="#F3F1E9"/>
+  <path d="M512 380 L712 380 L672 410 L690 700 L740 740 L740 800 L512 800 Z" fill="#5b8def"/>
+  <path d="M512 462 L536 500 L536 580 L488 580 L488 500 Z" fill="#16181d"/>
+</svg>

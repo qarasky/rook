@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Rook",
+  "version": "0.1.0",
+  "identifier": "dev.skyler.ghwrapper",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Rook",
+        "decorations": false,
+        "center": true,
+        "minWidth": 760,
+        "minHeight": 480,
+        "theme": "Dark",
+        "backgroundColor": "#16181d",
+        "width": 1100,
+        "height": 700
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "DeveloperTool",
+    "shortDescription": "Desktop GUI for the GitHub CLI",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM4QzBDMTM3QzI0MERFNzYKUldSMjNrRENOOEhBeVBLQXkyVElKcXhxU2NMWHdRMVlsOVIzOXRjcGxPWlVyMUc5bHVGbWZsc1QK",
+      "endpoints": [
+        "https://github.com/qarasky/rook/releases/latest/download/latest.json"
+      ]
+    }
+  }
+}
