@@ -1,6 +1,6 @@
 use serde::Serialize;
 
-use crate::cmd::{ensure_repo, git, git_remote};
+use crate::cmd::{command, ensure_repo, git, git_remote};
 
 #[derive(Serialize, Default)]
 pub struct FileChange {
@@ -69,7 +69,7 @@ pub async fn repo_status(path: String) -> Result<RepoStatus, String> {
 pub async fn file_diff(path: String, file: String, staged: bool, untracked: bool) -> Result<String, String> {
     if untracked {
         // `git diff --no-index` exits 1 when files differ, so don't treat that as failure.
-        let out = std::process::Command::new("git")
+        let out = command("git")
             .args(["diff", "--no-index", "--", "/dev/null", &file])
             .current_dir(&path)
             .output()

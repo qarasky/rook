@@ -94,7 +94,9 @@ scripts/              Icon generator
 
 ## Backend rules
 
-- **Run external programs through `cmd.rs`**, never with a shell string. Pass arguments as a
+- **Run external programs through `cmd.rs`** (`run`, `git`, `command`, `spawn_detached`), never with
+  `Command::new` or a shell string. `command()` strips the AppImage's `LD_LIBRARY_PATH`, `PATH` and
+  similar variables; without that, system `git` loads the bundle's old libraries and https fails. Pass arguments as a
   slice, and put user-supplied file names after a `--` so they cannot be read as options.
 - Commands that talk to the remote (push, pull, fetch) must use `git_remote`, which sets `gh`
   as the credential helper. Local commands use `git`.
