@@ -47,18 +47,25 @@ jobs:
 
       - run: npm ci
 
+      # The Tauri CLI and tauri-action only take config overrides through --config (there is no
+      # TAURI_CONFIG env var), so the version and updater switch go in a file passed in args.
+      # Update artifacts need the signing key, which the Nix build doesn't have, so they are
+      # switched on here and not in tauri.conf.json.
+      - name: Write CI config override
+        run: |
+          jq -n --arg v "$VERSION" '{version: $v, bundle: {createUpdaterArtifacts: true}}' \
+            > tauri.ci.json
+          cat tauri.ci.json
+
       - uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-          # Update artifacts need the signing key, which the Nix build doesn't have, so they are
-          # switched on here and not in tauri.conf.json.
-          TAURI_CONFIG: '{"version":"${{ env.VERSION }}","bundle":{"createUpdaterArtifacts":true}}'
         with:
           tagName: v${{ env.VERSION }}
           releaseName: Rook ${{ env.VERSION }}
           generateReleaseNotes: true
           releaseDraft: false
           prerelease: false
-          args: --bundles appimage,deb
+          args: --bundles appimage,deb --config tauri.ci.json

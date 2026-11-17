@@ -53,7 +53,7 @@ built with `cargo-tauri.hook`. It wraps the binary with `gh` and `git` on `PATH`
 - `.github/workflows/release.yml` builds an AppImage and a deb on every push to `main` (docs-only
   pushes are skipped) and publishes a GitHub release with `latest.json` for the updater.
 - The version is `<major>.<minor>` from `tauri.conf.json` plus the workflow run number, injected
-  with `TAURI_CONFIG`. The files in the repo stay at `0.1.0`. Change major/minor by editing
+  through `--config tauri.ci.json` (written by the workflow). The files in the repo stay at `0.1.0`. Change major/minor by editing
   `tauri.conf.json`.
 - Update artifacts are signed. The public key is in `tauri.conf.json` (`plugins.updater`). The
   private key is the repo secret `TAURI_SIGNING_PRIVATE_KEY` and is also kept at
